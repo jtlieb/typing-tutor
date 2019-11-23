@@ -1,0 +1,18 @@
+<html>
+  <head>
+    <title>TypingTutor Account Test</title>
+    <script src="/static/scripts/lib/jquery.min.js"></script>
+    <script src="/static/scripts/main.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/styles/styles.css" />
+  </head>
+  <body>
+    <div class="nav">
+      <% if (user) { %>
+      <p>
+        Hi <%= user %> |
+        <a href="/account/logout">Log out</a>
+      </p>
+      <% } %>
+    </div>
+  </body>
+</html>
