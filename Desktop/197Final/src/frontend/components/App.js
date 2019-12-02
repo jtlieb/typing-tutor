@@ -28,7 +28,6 @@ class App extends React.Component {
       >
         <Header />
         <h1>Typing Test</h1>
-        <StatBar />
         <TextContainer />
         <TextBox />
       </div>

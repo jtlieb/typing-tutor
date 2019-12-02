@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { NEXT_WORD, START_TRIAL, TICK, END_TRIAL } from './types'
+import { NEXT_WORD, START_TRIAL, TICK, END_TRIAL, FINISHED } from './types'
 
 export const nextWord = word => {
   return dispatch => {
@@ -30,6 +30,12 @@ export const tick = () => {
 export const end = () => {
   return dispatch => {
     dispatch({ type: END_TRIAL })
+  }
+}
+
+export const finished = () => {
+  return dispatch => {
+    dispatch({ type: FINISHED })
   }
 }
 

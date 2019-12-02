@@ -6,25 +6,30 @@ class TextBox extends React.Component {
   constructor(props) {
     console.log(props)
     super(props)
-    this.state = { text: '' }
+    this.state = { text: '', on: false }
     this.handleChange = this.handleChange.bind(this)
   }
 
   handleChange(event) {
-    if (!this.props.reduxState.on) {
-      this.props.start()
-    }
-    if (event.target.value.includes(' ')) {
-      // THIS IS WHERE SOMETHING WILL GO
-      console.log(this.state.text)
-      this.setState({ text: '' })
-      this.props.next(this.state.text)
-    } else {
-      this.setState({ text: event.target.value })
+    if (!this.props.reduxState.finished) {
+      if (!this.props.reduxState.on) {
+        this.props.start()
+      }
+      if (event.target.value.includes(' ')) {
+        // THIS IS WHERE SOMETHING WILL GO
+        console.log(this.state.text)
+        this.setState({ text: '' })
+        this.props.next(this.state.text)
+      } else {
+        this.setState({ text: event.target.value })
+      }
     }
   }
 
   render() {
+    if (this.props.reduxState.finished) {
+      this.state.text = ''
+    }
     return (
       <div>
         <div>

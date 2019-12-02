@@ -5,7 +5,13 @@ import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 import axios from 'axios'
 import App from './components/App'
-import { NEXT_WORD, START_TRIAL, TICK, END_TRIAL } from './actions/types'
+import {
+  NEXT_WORD,
+  START_TRIAL,
+  TICK,
+  END_TRIAL,
+  FINISHED
+} from './actions/types'
 import randomWords from 'random-words'
 import tick from './actions/actions'
 
@@ -17,7 +23,8 @@ const reducer = (
     index: 0,
     on: false,
     wordStatus: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    time: 5
+    time: 5,
+    finished: false
   },
   action
 ) => {
@@ -43,9 +50,13 @@ const reducer = (
         index: 0,
         on: false,
         wordStatus: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        time: 5
+        time: 5,
+        finished: true
       }
 
+    case FINISHED:
+      stateCopy.finished = false
+      break
     case NEXT_WORD:
       const index = stateCopy.index
       const word = stateCopy.words[index]
