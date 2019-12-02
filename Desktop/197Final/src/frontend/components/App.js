@@ -1,6 +1,10 @@
 import React from 'react'
 
 import { connect } from 'react-redux'
+import TextBox from './TextBox.js'
+import TextContainer from './TextContainer'
+import TLItem from './TLItem'
+import randomWords from 'random-words'
 
 class App extends React.Component {
   constructor(props) {
@@ -10,21 +14,27 @@ class App extends React.Component {
   }
 
   render() {
-    console.log('testing')
     return (
-      <div>
-        <div>
-          <h1>Groceries</h1>
-        </div>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+      >
+        <h1>Typing Test</h1>
+        <TextContainer />
+        <TextBox />
       </div>
     )
   }
 }
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     getTodos: () => dispatch(getTodos())
-//   }
-// }
+const mapStateToProps = state => {
+  return {
+    reduxState: state
+  }
+}
 
-export default connect(null)(App)
+export default connect(mapStateToProps)(App)

@@ -1,17 +1,18 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { ADD_TODO_SUCCESS } from '../actions/types';
-import { addTodo } from '../actions/actions';
+import React from 'react'
+import { connect } from 'react-redux'
+import { ADD_TODO_SUCCESS } from '../actions/types'
+import { addTodo } from '../actions/actions'
 
 class TLActions extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       value: ''
-    };
+    }
   }
 
   render() {
+    console.log(this.state.words)
     return (
       <div>
         <input
@@ -22,14 +23,14 @@ class TLActions extends React.Component {
           Add Item
         </button>
       </div>
-    );
+    )
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     addItem: itemName => dispatch(addTodo(itemName))
-  };
-};
+  }
+}
 
-export default connect(null, mapDispatchToProps)(TLActions);
+export default connect(null, mapDispatchToProps)(TLActions)

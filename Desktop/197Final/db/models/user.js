@@ -1,4 +1,4 @@
-var S = require('sequelize')
+const S = require('sequelize')
 
 module.exports = {
   username: { type: S.STRING, primaryKey: true },

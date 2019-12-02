@@ -3,6 +3,7 @@ var router = express.Router()
 const isAuthenticated = require('./isAuthenticated.js')
 const { User } = require('../../../db/dbconnect.js')
 const path = require('path')
+const words = require('random-words')
 
 // Fetches signup page
 router.get('/signup', function(req, res) {
@@ -14,7 +15,8 @@ router.post('/signup', function(req, res, next) {
   var username = req.body.username
   var password = req.body.password
   User.findOrCreate({
-    where: { username: username }
+    where: { username: username },
+    defaults: { password: password, numTrials: 0, speed: 0 }
   }).then(([user, created]) => {
     if (created) {
       console.log('created')
@@ -28,6 +30,7 @@ router.post('/signup', function(req, res, next) {
 
 // User is looking to login, renders the login page
 router.get('/login', function(req, res) {
+  console.log(words)
   res.sendFile(path.join(__dirname, '..', '..', '..', 'public', 'login.html'))
 })
 
@@ -36,15 +39,19 @@ router.post('/login', function(req, res, next) {
   var username = req.body.username
   var password = req.body.password
 
-  db.user
-    .findOne({ where: { username: username, pasword: password } })
-    .then(userValue => {
-      console.log(userValue.username)
-      console.log(userValue.password)
-      console.log(userValue.numTrials)
-      req.session.user = username
-      res.redirect('/')
-    })
+  User.findOne({ where: { username: username, password: password } }).then(
+    userValue => {
+      if (userValue) {
+        console.log(userValue.username)
+        console.log(userValue.password)
+        console.log(userValue.numTrials)
+        req.session.user = username
+        res.redirect('/')
+      } else {
+        res.redirect('/account/login')
+      }
+    }
+  )
 })
 
 // Resets the session user to blank, removes account data

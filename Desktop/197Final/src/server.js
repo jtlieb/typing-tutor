@@ -3,11 +3,13 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const cookieSession = require('cookie-session')
 const accountRouter = require('./server/routes/account.js')
+const randomWords = require('random-words')
 const app = express()
 
 // Register body parser middleware
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+app.set('view engine', 'html')
 
 // Set 'public' to be a static directory
 app.use(express.static(path.join(__dirname, '..', 'public')))
@@ -48,8 +50,7 @@ app.get('*', function(req, res, next) {
   if (!req.session.user || req.session.user.length == 0) {
     res.redirect('./account/login')
   } else {
-    console.log('going this route')
-    res.render('index2')
+    res.sendFile(path.join(__dirname, '..', 'public', 'index.html'))
   }
 })
 

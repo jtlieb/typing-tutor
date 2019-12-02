@@ -1,36 +1,15 @@
 import axios from 'axios'
-import {
-  ADD_TODO_SUCCESS,
-  ADD_TODO_FAILURE,
-  GET_TODOS_SUCCESS,
-  GET_TODOS_FAILURE,
-  REMOVE_TODO_SUCCESS,
-  REMOVE_TODO_FAILURE
-} from './types'
+import { NEXT_WORD, START_TRIAL } from './types'
 
-export const addTodo = newTodo => {
+export const nextWord = word => {
   return dispatch => {
-    axios
-      .post('/api/todo', { todo: newTodo })
-      .then(({ data }) => {
-        dispatch({ type: ADD_TODO_SUCCESS, todos: data })
-      })
-      .catch(error => {
-        dispatch({ type: ADD_TODO_FAILURE, error })
-      })
+    dispatch({ type: NEXT_WORD, word: word })
   }
 }
 
-export const getTodos = () => {
+export const startTrial = () => {
   return dispatch => {
-    axios
-      .get('/api/todos')
-      .then(({ data }) => {
-        dispatch({ type: GET_TODOS_SUCCESS, todos: data })
-      })
-      .catch(error => {
-        dispatch({ type: GET_TODOS_FAILURE, error })
-      })
+    dispatch({ type: START_TRIAL })
   }
 }
 
