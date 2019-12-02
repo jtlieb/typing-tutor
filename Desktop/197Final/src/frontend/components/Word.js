@@ -9,7 +9,7 @@ class Word extends React.Component {
   }
 
   render() {
-    let color = '141414'
+    let color = '041333'
     switch (this.props.reduxState.wordStatus[this.props.index]) {
       case 1:
         color = 'green'
@@ -25,7 +25,7 @@ class Word extends React.Component {
             style={{
               border: '1px solid black',
               borderRadius: '3px',
-              margin: '3px',
+              margin: '0px 3px 0px 3px',
               padding: '0px 3px 0px 3px',
               color: color
             }}
@@ -40,6 +40,7 @@ class Word extends React.Component {
           <p
             style={{
               padding: '0px 3px 0px 3px',
+              margin: '0px 3px 0px 3px',
               color: color
             }}
           >

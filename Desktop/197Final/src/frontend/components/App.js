@@ -4,7 +4,9 @@ import { connect } from 'react-redux'
 import TextBox from './TextBox.js'
 import TextContainer from './TextContainer'
 import TLItem from './TLItem'
+import StatBar from './StatBar'
 import randomWords from 'random-words'
+import Header from './Header'
 
 class App extends React.Component {
   constructor(props) {
@@ -24,7 +26,9 @@ class App extends React.Component {
           alignItems: 'center'
         }}
       >
+        <Header />
         <h1>Typing Test</h1>
+        <StatBar />
         <TextContainer />
         <TextBox />
       </div>

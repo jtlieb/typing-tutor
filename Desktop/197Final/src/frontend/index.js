@@ -34,7 +34,7 @@ const reducer = (
       const word = stateCopy.words[index]
       console.log(stateCopy.words[index])
       if (word === action.word) {
-        stateCopy.chars += word.length
+        stateCopy.chars += word.length + 1
 
         // 1 = typed correctly, 2 = typed incorrectly
         stateCopy.wordStatus[index] = 1
@@ -73,11 +73,6 @@ const reducer = (
       }
       break
   }
-  console.log(stateCopy.words)
-  console.log('****************')
-  console.log(stateCopy.words[stateCopy.index])
-  console.log('****************')
-  console.log(stateCopy.chars)
   return stateCopy
 }
 
