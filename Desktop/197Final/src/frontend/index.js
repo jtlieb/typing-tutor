@@ -5,8 +5,9 @@ import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 import axios from 'axios'
 import App from './components/App'
-import { NEXT_WORD, START_TRIAL } from './actions/types'
+import { NEXT_WORD, START_TRIAL, TICK, END_TRIAL } from './actions/types'
 import randomWords from 'random-words'
+import tick from './actions/actions'
 
 const reducer = (
   state = {
@@ -15,7 +16,8 @@ const reducer = (
     chars: 0,
     index: 0,
     on: false,
-    wordStatus: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    wordStatus: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    time: 5
   },
   action
 ) => {
@@ -25,17 +27,31 @@ const reducer = (
       if (!stateCopy.on) {
         stateCopy.on = true
         stateCopy.trial = {}
-
-        // Adding Trial Parameter
       }
       break
+    case TICK:
+      stateCopy.time--
+      console.log(stateCopy.time)
+      break
+
+    case END_TRIAL:
+      console.log('got here')
+      return {
+        input: '',
+        words: randomWords({ exactly: 15 }),
+        chars: 0,
+        index: 0,
+        on: false,
+        wordStatus: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        time: 5
+      }
+
     case NEXT_WORD:
       const index = stateCopy.index
       const word = stateCopy.words[index]
       console.log(stateCopy.words[index])
       if (word === action.word) {
         stateCopy.chars += word.length + 1
-
         // 1 = typed correctly, 2 = typed incorrectly
         stateCopy.wordStatus[index] = 1
       } else {

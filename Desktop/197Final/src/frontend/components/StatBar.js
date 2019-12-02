@@ -6,22 +6,6 @@ class StatBar extends React.Component {
   constructor(props) {
     console.log(props)
     super(props)
-    this.state = { text: '' }
-    this.handleChange = this.handleChange.bind(this)
-  }
-
-  handleChange(event) {
-    if (!this.props.reduxState.on) {
-      this.props.start()
-    }
-    if (event.target.value.includes(' ')) {
-      // THIS IS WHERE SOMETHING WILL GO
-      console.log(this.state.text)
-      this.setState({ text: '' })
-      this.props.next(this.state.text)
-    } else {
-      this.setState({ text: event.target.value })
-    }
   }
 
   render() {
@@ -30,24 +14,57 @@ class StatBar extends React.Component {
         style={{
           backgroundColor: '76d1e3',
           width: 400,
-          height: 20,
+          height: 30,
           borderRadius: '7px 7px 0px 0px',
           display: 'flex',
           flexDirection: 'row',
-          padding: 6,
-          fontSize: 8
+          fontSize: 8,
+          padding: '0px 20px 0px 20px',
+          justifyContent: 'space-between'
         }}
       >
-        <p>Characters Typed:</p>
-        <b
+        <div
           style={{
-            margin: '0px 0px 0px 6px'
+            display: 'flex',
+            padding: '11px 0px 0px 0px',
+            width: '90px',
+            justifyContent: 'space-between'
           }}
         >
-          {this.props.reduxState.chars === 0
-            ? ' ?'
-            : ' ' + this.props.reduxState.chars}
-        </b>
+          <p>Characters Typed:</p>
+          <b
+            style={{
+              backgroundColor: 'white',
+              border: '2px solid white',
+              height: 13,
+              borderRadius: 2
+            }}
+          >
+            {this.props.reduxState.chars === 0
+              ? ' ?'
+              : ' ' + this.props.reduxState.chars}
+          </b>
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            padding: '11px 0px 0px 0px',
+            width: '40px',
+            justifyContent: 'space-between'
+          }}
+        >
+          <p>Time:</p>
+          <b
+            style={{
+              backgroundColor: 'white',
+              border: '2px solid white',
+              height: 13,
+              borderRadius: 2
+            }}
+          >
+            {this.props.reduxState.time}
+          </b>
+        </div>
       </div>
     )
   }
