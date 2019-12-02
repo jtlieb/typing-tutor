@@ -24,7 +24,11 @@ class StatBar extends React.Component {
           justifyContent: 'space-between'
         }}
       >
-        <Stat statName="Characters Typed:" stat={this.props.reduxState.chars} />
+        <Stat
+          isTimer="timer"
+          statName="Timer:"
+          stat={this.props.reduxState.time}
+        />
         <Stat statName="CPM:" stat={this.props.reduxState.cpm} />
         <Stat
           statName="WPM:"

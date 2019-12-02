@@ -100,7 +100,7 @@ ReactDOM.render(
 function reset(copy) {
   return {
     input: '',
-    words: randomWords({ exactly: 15 }),
+    words: randomWords({ exactly: 15, contains: 'qu' }),
     chars: 0,
     index: 0,
     on: false,

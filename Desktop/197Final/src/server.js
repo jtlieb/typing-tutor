@@ -3,7 +3,7 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const cookieSession = require('cookie-session')
 const accountRouter = require('./server/routes/account.js')
-const randomWords = require('random-words')
+const apiRouter = require('./server/routes/api.js')
 const app = express()
 
 // Register body parser middleware
@@ -21,6 +21,12 @@ app.use(
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
   })
 )
+console.log('TESTING')
+console.log('is it getting here')
+router.post('/api/username', function(req, res) {
+  console.log('hello')
+  res.json({ username: req.session.user })
+})
 
 /** TODO: What does this do? */
 app.post('/', function(req, res, next) {

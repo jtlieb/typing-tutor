@@ -3,7 +3,6 @@ var router = express.Router()
 const isAuthenticated = require('./isAuthenticated.js')
 const { User } = require('../../../db/dbconnect.js')
 const path = require('path')
-const words = require('random-words')
 
 // Fetches signup page
 router.get('/signup', function(req, res) {
@@ -30,7 +29,6 @@ router.post('/signup', function(req, res, next) {
 
 // User is looking to login, renders the login page
 router.get('/login', function(req, res) {
-  console.log(words)
   res.sendFile(path.join(__dirname, '..', '..', '..', 'public', 'login.html'))
 })
 

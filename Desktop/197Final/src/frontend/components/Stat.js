@@ -9,19 +9,34 @@ class Stat extends React.Component {
   }
 
   render() {
+    const timer = this.props.isTimer
     return (
       <div
-        style={{
-          display: 'flex',
-          paddingTop: 11,
-          justifyContent: 'space-between'
-        }}
+        style={
+          timer
+            ? {
+                display: 'flex',
+                marginTop: 10,
+                marginBottom: 6,
+                padding: 2,
+                justifyContent: 'space-between',
+                color: 'white',
+                backgroundColor: '0f4652',
+                borderRadius: 2,
+                border: '2px solid 0f4652'
+              }
+            : {
+                display: 'flex',
+                paddingTop: 11,
+                justifyContent: 'space-between'
+              }
+        }
       >
         <p>{this.props.statName}</p>
         <b
           style={{
-            backgroundColor: 'white',
-            border: '2px solid white',
+            backgroundColor: timer ? null : 'white',
+            border: timer ? '0px' : '2px solid white',
             marginLeft: 5,
             height: 12,
             borderRadius: 2

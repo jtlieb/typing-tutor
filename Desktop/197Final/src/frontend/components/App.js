@@ -7,6 +7,7 @@ import TLItem from './TLItem'
 import StatBar from './StatBar'
 import randomWords from 'random-words'
 import Header from './Header'
+import { username } from '../actions/actions'
 
 class App extends React.Component {
   constructor(props) {
@@ -27,7 +28,7 @@ class App extends React.Component {
         }}
       >
         <Header />
-        <h1>Typing Test</h1>
+        <h1>Hello</h1>
         <TextContainer />
         <TextBox />
       </div>
@@ -40,5 +41,4 @@ const mapStateToProps = state => {
     reduxState: state
   }
 }
-
 export default connect(mapStateToProps)(App)
