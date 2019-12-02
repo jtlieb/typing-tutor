@@ -18,8 +18,9 @@ class App extends React.Component {
       <div
         style={{
           display: 'flex',
+          flex: 1,
           flexDirection: 'column',
-          justifyContent: 'center',
+          justifyContent: 'space-between',
           alignItems: 'center'
         }}
       >

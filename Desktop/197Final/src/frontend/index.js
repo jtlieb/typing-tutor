@@ -15,7 +15,7 @@ const reducer = (
     chars: 0,
     index: 0,
     on: false,
-    trial: {}
+    wordStatus: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   },
   action
 ) => {
@@ -24,6 +24,7 @@ const reducer = (
     case START_TRIAL:
       if (!stateCopy.on) {
         stateCopy.on = true
+        stateCopy.trial = {}
 
         // Adding Trial Parameter
       }
@@ -34,6 +35,11 @@ const reducer = (
       console.log(stateCopy.words[index])
       if (word === action.word) {
         stateCopy.chars += word.length
+
+        // 1 = typed correctly, 2 = typed incorrectly
+        stateCopy.wordStatus[index] = 1
+      } else {
+        stateCopy.wordStatus[index] = 2
       }
 
       // Adding each key combo to the trial data
@@ -61,6 +67,7 @@ const reducer = (
         stateCopy.words.splice(0, 5)
         stateCopy.words = stateCopy.words.concat(randomWords({ exactly: 5 }))
         stateCopy.index = 0
+        stateCopy.wordStatus = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
       } else {
         stateCopy.index++
       }

@@ -5,40 +5,56 @@ import { nextWord } from '../actions/actions'
 
 class Word extends React.Component {
   constructor(props) {
-    console.log(props)
     super(props)
   }
 
-  handleChange(event) {
-    if (event.target.value.includes(' ')) {
-      // THIS IS WHERE SOMETHING WILL GO
-      console.log(this.state.text)
-      this.setState({ text: '' })
-      this.props.next(this.state.text)
+  render() {
+    let color = '141414'
+    switch (this.props.reduxState.wordStatus[this.props.index]) {
+      case 1:
+        color = 'green'
+        break
+      case 2:
+        color = 'red'
+    }
+    if (this.props.index === this.props.reduxState.index) {
+      console.log(this.props.index + '******')
+      return (
+        <div>
+          <p
+            style={{
+              border: '1px solid black',
+              borderRadius: '3px',
+              margin: '3px',
+              padding: '0px 3px 0px 3px',
+              color: color
+            }}
+          >
+            {this.props.reduxState.words[this.props.index]}
+          </p>
+        </div>
+      )
     } else {
-      this.setState({ text: event.target.value })
+      return (
+        <div>
+          <p
+            style={{
+              padding: '0px 3px 0px 3px',
+              color: color
+            }}
+          >
+            {'  ' + this.props.reduxState.words[this.props.index] + '  '}
+          </p>
+        </div>
+      )
     }
   }
-
-  render() {
-    return (
-      <div>
-        <div>
-          <input
-            type="text"
-            onChange={this.handleChange}
-            value={this.state.text}
-          />
-        </div>
-      </div>
-    )
-  }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapPropsToState = state => {
   return {
-    next: word => dispatch(nextWord(word))
+    reduxState: state
   }
 }
 
-export default connect(null, mapDispatchToProps)(TextBox)
+export default connect(mapPropsToState)(Word)

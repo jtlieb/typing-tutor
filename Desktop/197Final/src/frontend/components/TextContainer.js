@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import TLItem from './TLItem'
+import Word from './Word'
 
 class TextContainer extends React.Component {
   constructor(props) {
@@ -10,39 +11,56 @@ class TextContainer extends React.Component {
   render() {
     const words = this.props.reduxState.words
     return (
-      <div>
-        <div style={{ color: '00aeef' }}>
-          {words[0] +
-            ' ' +
-            words[1] +
-            ' ' +
-            words[2] +
-            ' ' +
-            words[3] +
-            ' ' +
-            words[4]}
+      <div
+        style={{
+          display: 'flex',
+
+          color: '141414',
+          flex: 1,
+          flexDirection: 'column'
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center '
+          }}
+        >
+          {this.props.reduxState.words.map((value, index) => {
+            if (index < 5) {
+              return <Word index={index} />
+            }
+          })}
         </div>
-        <div>
-          {words[5] +
-            ' ' +
-            words[6] +
-            ' ' +
-            words[7] +
-            ' ' +
-            words[8] +
-            ' ' +
-            words[9]}
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center '
+          }}
+        >
+          {this.props.reduxState.words.map((value, index) => {
+            if (index >= 5 && index < 10) {
+              return <Word index={index} />
+            }
+          })}
         </div>
-        <div>
-          {words[10] +
-            ' ' +
-            words[11] +
-            ' ' +
-            words[12] +
-            ' ' +
-            words[13] +
-            ' ' +
-            words[14]}
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center '
+          }}
+        >
+          {this.props.reduxState.words.map((value, index) => {
+            if (index >= 10) {
+              return <Word index={index} />
+            }
+          })}
         </div>
       </div>
     )
