@@ -14,17 +14,21 @@ class TextContainer extends React.Component {
       <div
         style={{
           display: 'flex',
-
-          color: '141414',
+          backgroundColor: '#ebf5f7',
+          padding: '0px 10px 0px 10px',
           flex: 1,
-          flexDirection: 'column'
+          borderRadius: 7,
+          margin: 10,
+          flexDirection: 'column',
+          width: 500,
+          shadowOffset: { width: 10, height: 10 }
         }}
       >
         <div
           style={{
             display: 'flex',
             flexDirection: 'row',
-            justifyContent: 'space-between',
+            justifyContent: 'center',
             alignItems: 'center '
           }}
         >
@@ -38,26 +42,12 @@ class TextContainer extends React.Component {
           style={{
             display: 'flex',
             flexDirection: 'row',
-            justifyContent: 'space-between',
+            justifyContent: 'center',
             alignItems: 'center '
           }}
         >
           {this.props.reduxState.words.map((value, index) => {
             if (index >= 5 && index < 10) {
-              return <Word index={index} />
-            }
-          })}
-        </div>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center '
-          }}
-        >
-          {this.props.reduxState.words.map((value, index) => {
-            if (index >= 10) {
               return <Word index={index} />
             }
           })}

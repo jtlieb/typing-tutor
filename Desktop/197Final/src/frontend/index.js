@@ -46,13 +46,13 @@ const reducer = (
       for (let i = 0; i < Math.min(word.length, action.word.length) - 1; i++) {
         const combo = word.charAt(i) + word.charAt(i + 1)
         if (!stateCopy.trial[combo]) {
-          state.trial[combo] = { correct: 0, total: 0 }
+          state.trial[combo] = { wrong: 0, total: 0 }
         }
         if (
-          word.charAt(i) === action.word.charAt(i) &&
-          word.charAt(i + 1) === action.word.charAt(i + 1)
+          word.charAt(i) !== action.word.charAt(i) ||
+          word.charAt(i + 1) !== action.word.charAt(i + 1)
         ) {
-          stateCopy.trial[combo].correct++
+          stateCopy.trial[combo].wrong++
         }
 
         stateCopy.trial[combo].total++
