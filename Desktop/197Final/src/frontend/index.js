@@ -15,19 +15,7 @@ import {
 import randomWords from 'random-words'
 import tick from './actions/actions'
 
-const reducer = (
-  state = {
-    input: '',
-    words: randomWords({ exactly: 15 }),
-    chars: 0,
-    index: 0,
-    on: false,
-    wordStatus: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    time: 5,
-    finished: false
-  },
-  action
-) => {
+const reducer = (state = reset(state), action) => {
   let stateCopy = Object.assign({}, state)
   switch (action.type) {
     case START_TRIAL:
@@ -43,31 +31,24 @@ const reducer = (
 
     case END_TRIAL:
       console.log('got here')
-      return {
-        input: '',
-        words: randomWords({ exactly: 15 }),
-        chars: 0,
-        index: 0,
-        on: false,
-        wordStatus: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        time: 5,
-        finished: true
-      }
+      stateCopy.finished = true
+      break
 
     case FINISHED:
-      stateCopy.finished = false
+      stateCopy = reset(stateCopy)
       break
     case NEXT_WORD:
       const index = stateCopy.index
       const word = stateCopy.words[index]
-      console.log(stateCopy.words[index])
       if (word === action.word) {
         stateCopy.chars += word.length + 1
+        stateCopy.accuracy.correct++
         // 1 = typed correctly, 2 = typed incorrectly
         stateCopy.wordStatus[index] = 1
       } else {
         stateCopy.wordStatus[index] = 2
       }
+      stateCopy.accuracy.typed++
 
       // Adding each key combo to the trial data
       for (let i = 0; i < Math.min(word.length, action.word.length) - 1; i++) {
@@ -88,13 +69,15 @@ const reducer = (
         }
       }
 
-      console.log(stateCopy.trial)
-
       if (index == 4) {
         stateCopy.words.splice(0, 5)
         stateCopy.words = stateCopy.words.concat(randomWords({ exactly: 5 }))
         stateCopy.index = 0
         stateCopy.wordStatus = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        stateCopy.cpm = Math.floor(
+          stateCopy.chars / ((60 - stateCopy.time) / 60)
+        )
+        console.log('cpm: ' + stateCopy.cpm)
       } else {
         stateCopy.index++
       }
@@ -113,3 +96,18 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('react-app') // binds to <div id="react-app"> in public/index.html
 )
+
+function reset(copy) {
+  return {
+    input: '',
+    words: randomWords({ exactly: 15 }),
+    chars: 0,
+    index: 0,
+    on: false,
+    wordStatus: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    time: 5,
+    finished: false,
+    cpm: 0,
+    accuracy: { correct: 0, typed: 0 }
+  }
+}
