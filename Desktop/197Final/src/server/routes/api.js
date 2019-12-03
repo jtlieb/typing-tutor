@@ -7,4 +7,4 @@ const words = require('random-words')
 
 // Fetches signup page
 
-module.exports = apiRouter
+module.exports = router

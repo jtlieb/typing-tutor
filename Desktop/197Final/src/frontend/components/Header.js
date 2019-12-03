@@ -4,8 +4,8 @@ function Header() {
   return (
     <nav
       style={{
-        height: 30,
-        width: 2000,
+        height: 40,
+        width: '100vw',
         backgroundColor: '76d1e3',
         margin: '0px 0px 20px 0px'
       }}

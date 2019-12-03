@@ -21,7 +21,7 @@ export const startTrial = () => {
         dispatch(tick())
       },
       1000,
-      5,
+      60,
       dispatch
     )
     dispatch({ type: START_TRIAL })

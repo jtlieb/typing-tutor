@@ -105,7 +105,7 @@ function reset(copy) {
     index: 0,
     on: false,
     wordStatus: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    time: 5,
+    time: 60,
     finished: false,
     cpm: 0,
     accuracy: { correct: 0, typed: 0 }

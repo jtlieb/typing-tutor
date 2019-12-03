@@ -21,12 +21,6 @@ app.use(
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
   })
 )
-console.log('TESTING')
-console.log('is it getting here')
-router.post('/api/username', function(req, res) {
-  console.log('hello')
-  res.json({ username: req.session.user })
-})
 
 /** TODO: What does this do? */
 app.post('/', function(req, res, next) {
@@ -51,11 +45,11 @@ app.use('/account', accountRouter)
 // })
 
 app.get('*', function(req, res, next) {
-  console.log(req.session.user)
   // If user is not logged in, prompt to sign in before continuing forward
   if (!req.session.user || req.session.user.length == 0) {
     res.redirect('./account/login')
   } else {
+    res.cookie('cookieName', 0, { username: req.session.user, httpOnly: true })
     res.sendFile(path.join(__dirname, '..', 'public', 'index.html'))
   }
 })
